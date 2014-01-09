@@ -66,6 +66,8 @@ add_action('pre_get_posts','custom_pre_get_posts');
 
 add_filter( 'loop_shop_columns', 'custom_woocommerce_shop_columns');
 
+add_filter( 'walker_nav_menu_start_el' , 'custom_walker_nav_menu_start_el', 10, 4);
+
 //Custom shortcodes
 
 //add_shortcode( 'phone_number', 'custom_phone_number');
@@ -220,5 +222,15 @@ function custom_pre_get_posts($query) {
          );
          $query->set('meta_query', $meta_query);
     }
+}
+
+
+function custom_walker_nav_menu_start_el($item_output, $item, $depth, $args){
+	if($item->ID == 124 && $args->theme_location == 'secondary_header') {
+		ob_start();
+		woocommerce_get_template('cart/mini-cart.php');
+    	$item_output .= ob_get_clean();
+	}
+	return $item_output;
 }
 

@@ -3356,3 +3356,68 @@ body {
 		}
 	}
 }
+
+
+
+
+.mini-cart {
+	color: #000;
+	background: #FFF;
+	padding: 1.6em;
+	border: 1px solid #e1e1e1;
+	z-index: 2000;
+	width: 22.2em;
+
+	.close-btn {
+		position: absolute;
+		top: 1em;
+		right: 1em;
+
+	}
+
+	> .header {
+		border-bottom: 1px solid #efefef;
+		padding: 0 0 1.6em 0;
+	}
+
+	.products {
+		.product {
+			border-bottom: 1px solid #efefef;
+			padding: 0.5em 0;
+
+			.product-title,
+			.product-title {
+				@include font-size(12);
+			}
+			.variation {
+				@include font-size(8);
+				@extend .clearfix;
+
+				dt {
+					font-weight:bold;
+					float: left;
+					width: 40%;
+					text-transform: uppercase;						
+				}
+
+				dd {
+					float: left;
+					width: 40%;	
+					margin: 0;						
+				}
+			}
+
+			.price {
+				margin: 0;
+				.amount {
+					color: #000;
+					@include font-size(12);
+				}
+			}
+		}
+	}
+
+	> .footer {
+		padding: 0.3em 0;
+	}
+}

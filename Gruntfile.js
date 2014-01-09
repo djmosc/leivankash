@@ -55,20 +55,21 @@ module.exports = function(grunt) {
         },
         watch: {
             options: {
-               spawn: false,
-               livereload: true
+               spawn: false
             },
             css: {
                 files: ['css/scss/*.scss'],
-                tasks: ['css']
+                tasks: ['compass', 'notify:watch'],
+                options: {
+                   livereload: true
+                }
             }
         },
-        connect: {
-            server: {
+        notify: {
+            watch: {
                 options: {
-                    port: 9001,
-                    base: 'leivankash/website/build',
-                    livereload: true
+                    title: 'SASS',  // optional
+                    message: 'Sucessfully compiled', //required
                 }
             }
         }
@@ -79,11 +80,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-notify');
 
     grunt.registerTask('default', ['compass', 'concat:plugins', 'uglify']);
     grunt.registerTask('live', ['compass', 'cssmin', 'concat:plugins', 'concat:live', 'uglify:live']);
     grunt.registerTask('css', ['compass', 'cssmin']);
     grunt.registerTask('javascript', ['concat', 'uglify']);
-    grunt.registerTask('server', ['watch', 'connect']);
 };

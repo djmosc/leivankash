@@ -76,7 +76,7 @@
 				</div>
 				<div class="break-on-tablet span seven alpha omega">
 					<p class="small text-right">
-						<?php _e("&copy; 2013 Charlie May | All Rights Reserved | Site by", THEME_NAME);?>
+						&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?> <?php _e(" | All Rights Reserved | Site by", THEME_NAME);?>
 						<a href="http://parkandcube.com" target="_blank">Park &amp; Cube</a> and <a href="http://www.mindblownmedia.com" target="_blank">Mind Blown Media</a>
 					</p>
 				</div>
@@ -87,16 +87,17 @@
 
 <?php wp_footer(); ?>
 
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-9989995-2', 'charlie-may.co.uk');
+  ga('create', 'UA-338027-29', 'leivankash.com');
   ga('send', 'pageview');
 </script>
-<script src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+<!--script src="//s7.addthis.com/js/300/addthis_widget.js"></script-->
 
 </body>
 </html>
