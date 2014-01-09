@@ -1,0 +1,18 @@
+@mixin device-width($width){
+	@media only screen and (max-width: 6.25em){
+		@content;
+	}
+}
+
+@mixin test(){
+	@content;
+}
+
+@mixin font-size($size){
+	font-size: ($size) + px;
+	font-size: ($size / 10) + rem;
+}
+
+@function pxtoem($px){
+	@return $px * 0.0769827586em;
+}

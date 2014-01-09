@@ -1,0 +1,206 @@
+/* =============================================================================
+   Backgrounds
+   ========================================================================== */
+
+.red-bg {
+	background-color: #c11d2d;
+}
+
+.dark-blue-bg {
+	background-color: #2c5065;
+}
+
+.blue-bg {
+	background-color: #00a3e0;
+}
+
+.light-blue-bg {
+	background-color: #3895cb;
+}
+
+.white-bg {
+	background-color: #FFFFFF;
+}
+
+.black-bg {
+	background-color: #000000;
+}
+
+.semi-black-bg {
+	background-color: #000;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.grey-bg {
+	background-color: #f0f0f0;
+}
+
+/* =============================================================================
+   Text
+   ========================================================================== */
+
+
+/* =============================================================================
+   Misc
+   ========================================================================== */
+
+
+
+/* =============================================================================
+   Buttons
+   ========================================================================== */
+
+
+/* =============================================================================
+   Grid
+   ========================================================================== */
+
+.row {	
+	
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.container:before,
+.container:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.container:after {
+    clear: both;
+}
+
+.container {
+	width: 90%;
+	max-width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	*zoom: 1;
+
+	@include device-width(7) {
+		width: 95%;
+	}
+
+	// @media only screen and (max-width: (860px)) {
+	//  width: auto;
+	// 	padding-left: 5%;
+	// 	padding-right: 5%;
+	// }
+}
+
+.span {
+	min-height: 1px;
+	padding-left: 10px;
+	padding-right: 10px;
+	float: left;
+	display: block;
+	position: relative;
+	@include box-sizing(border-box);
+	z-index: 100;
+}
+
+.alpha.span {
+	padding-left: 0px;
+}
+
+.omega.span {
+	padding-right: 0px;
+}
+ 
+$columns: ((one, 10%), (two, 20%), (two-and-half, 25%), (quarter, 25%), (three, 30%), (three-three, 33.3333333%), (third, 33.3333333%), (one-third, 33.3333333%), (four, 40%), (five, 50%), (six, 60%), (seven, 70%), (seven-and-half, 75%), (eight, 80%), (nine, 90%), (ten, 100%));
+$total_columns: length($columns);
+
+$i: 1;
+@each $column in $columns {
+	$class: nth($column, 1);
+	$width: nth($column, 2);
+	
+	.span.#{$class} {
+		width: ($width);
+	}
+
+	.push-#{$class} {
+		margin-left: ($width);
+	}
+
+	.pull-#{$class} {
+		margin-left: -($width);
+	}
+	$i: $i + 1;
+}
+
+.span.break-on-tablet {
+	@include device-width(8) {
+		width: 100% !important;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+.span.break-on-mobile {
+	@include device-width(4) {
+		width: 100% !important;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+.left, .alignleft {
+	float: left;
+}
+
+.right, .alignright {
+	float: right;
+}
+
+.clear-left {
+	clear: left;
+}
+
+.clear-right {
+	clear: right;
+}
+
+.aligncenter,
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	float: none;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.half-width {
+	width: 50%;
+}
+
+.third-width {
+	width: 33%;
+}
+
+.full-height {
+	height: 100%;
+}
+
+

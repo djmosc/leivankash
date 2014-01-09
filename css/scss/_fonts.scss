@@ -1,0 +1,31 @@
+@mixin arial {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.arial {
+	@include arial;
+}
+
+@mixin din {
+	font-family: 'DINNextLTW01-UltraLight 706122', Arial, Helvetica, sans-serif;
+}
+
+.din {
+	@include din;
+}
+
+@mixin avenir {
+	font-family: 'Avenir LT W01 55 Roman', Arial, Helvetica, sans-serif;
+}
+
+.avenir {
+	@include avenir;
+}
+
+@mixin novecento {
+	font-family: 'Novecento W00 Wide Bold', Arial, Helvetica, sans-serif;
+}
+
+.novecento {
+	@include novecento;
+}
