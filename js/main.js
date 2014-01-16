@@ -3,7 +3,7 @@
 	window.main = {
 		vars: {},
 		init: function(){
-
+			
 			var header = main.vars.header = $('#header'),
 				mainNavigation = header.mainNavigation = $('.main-navigation', header);
 
@@ -81,7 +81,7 @@
 					windowHeight = $(window).height(),
 					scrollTop = $(window).scrollTop(),
 					ajaxUrl = main.addToUrl(url, 'ajax'),
-					ajaxUrl = main.addToUrl(ajaxUrl, 'lightbox');
+					lightboxUrl = main.addToUrl(ajaxUrl, 'lightbox');
 
 				container.height(documentHeight);
 				container.show();
@@ -89,8 +89,8 @@
 				content.hide();
 				overlay.fadeIn('slow', function(){
 					
-					$.get(ajaxUrl, function(data) {
-						content.html(data)
+					$.get(lightboxUrl, function(data) {
+						content.html(data);
 						loader.fadeOut(function(){
 							
 							if($.fn.imagesLoaded){
@@ -141,27 +141,27 @@
 		},
 		zoom: {
 			init: function(){
-				// if($.fn.elevateZoom){
-				// 	var image = $('.zoom img');
-				// 	image.elevateZoom({
-				// 		tint:true,
-				// 		tintColour:'#FFF',
-				// 		tintOpacity:0.5,
-				// 		borderSize: 0,
-				// 		zoomWindowPosition: 1,
-				// 		zoomWindowOffetx: 20,
-				// 		zoomWindowFadeIn: 500,
-				// 		zoomWindowFadeOut: 500,
-				// 		zoomWindowWidth: 480,
-				// 		zoomWindowHeight: image.height(),
-				// 		lensFadeIn: 500,
-				// 		lensFadeOut: 500,
-				// 		easing: true,
-				// 		lensBorderSize: 0,
-				// 		cursor: 'pointer',
-				// 		responsive: true
-				// 	});
-				// }
+				if($.fn.elevateZoom){
+					var image = $('.zoom img');
+					image.elevateZoom({
+						tint:true,
+						tintColour:'#FFF',
+						tintOpacity:0.5,
+						borderSize: 0,
+						zoomWindowPosition: 1,
+						zoomWindowOffetx: 20,
+						zoomWindowFadeIn: 500,
+						zoomWindowFadeOut: 500,
+						zoomWindowWidth: 480,
+						zoomWindowHeight: image.height(),
+						lensFadeIn: 500,
+						lensFadeOut: 500,
+						easing: true,
+						lensBorderSize: 0,
+						cursor: 'pointer',
+						responsive: true
+					});
+				}
 			}
 		},
 
@@ -223,7 +223,7 @@
 
 				
 				container.slideDown(2000);
-			    if($('.content', container).length == 0){
+				if($('.content', container).length === 0){
 
 					loader = $('<div class="loader"></div>').hide();
 					container.animate({height: loader.actual('outerHeight')}, function(){
@@ -286,17 +286,17 @@
 
 		addToUrl: function(url, query){
 			var regex = new RegExp('(\\?|\\&)'+query+'=.*?(?=(&|$))'),
-		        qstring = /\?.+$/;
+				qstring = /\?.+$/;
 
 			if (regex.test(url)){
-		        url = url.replace(regex, '$1'+query+'=true');
-		    } else if (qstring.test(url)) {
-		        url = url + '&'+query+'=true';
-		    } else {
-		        url =  url + '?'+query+'=true';
-		    }
+				url = url.replace(regex, '$1'+query+'=true');
+			} else if (qstring.test(url)) {
+				url = url + '&'+query+'=true';
+			} else {
+				url =  url + '?'+query+'=true';
+			}
 
-		    return url;		
+			return url;		
 		},
 
 		equalHeight: function(){
@@ -304,7 +304,7 @@
 		
 				var currTallest = 0,
 				currRowStart = 0,
-				rowDivs = new Array(),
+				rowDivs = [],
 				topPos = 0;
 
 				$('.equal-height').each(function() {
@@ -313,7 +313,7 @@
 					topPos = element.position().top;
 					if (currRowStart != topPos) {
 
-						for (i = 0 ; i < rowDivs.length ; i++) {
+						for (i = 0; i < rowDivs.length ; i++) {
 							rowDivs[i].height(currTallest);
 						}
 
@@ -348,7 +348,7 @@
 			main.equalHeight();
 			main.scroller.resize();
 		}
-	}
+	};
 
 	$(function(){
 		main.init();
@@ -358,29 +358,3 @@
 		main.loaded();
 	});
 })(jQuery);
-
-
-// function onProductScrollerChange(scroller, nextItem){
-// 	$('.zoomContainer').remove();
-// 	if($.fn.elevateZoom){
-// 		var image = $('.zoom img', nextItem);
-// 		image.elevateZoom({
-// 			tint: true,
-// 			tintColour: '#FFF',
-// 			tintOpacity: 0.5,
-// 			borderSize: 0,
-// 			zoomWindowPosition: 1,
-// 			zoomWindowOffetx: 20,
-// 			zoomWindowFadeIn: 500,
-// 			zoomWindowFadeOut: 500,
-// 			zoomWindowWidth: 480,
-// 			zoomWindowHeight: image.height(),
-// 			lensFadeIn: 500,
-// 			lensFadeOut: 500,
-// 			easing: true,
-// 			lensBorderSize: 0,
-// 			cursor: 'pointer',
-// 			responsive: true
-// 		});
-// 	}
-// }

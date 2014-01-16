@@ -1,3 +1,5 @@
+@import '//fast.fonts.net/cssapi/e905f9a3-b65a-4f00-8632-840e9aea36bc.css';
+
 @mixin arial {
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -6,26 +8,66 @@
 	@include arial;
 }
 
-@mixin din {
-	font-family: 'DINNextLTW01-UltraLight 706122', Arial, Helvetica, sans-serif;
+@mixin didot {
+	font-family: 'Linotype Didot W01'; 
+	font-weight: 400;
+	font-style: normal;
 }
 
-.din {
-	@include din;
+.didot {
+	@include didot;
+}
+
+@mixin didot-italic {
+	font-family: 'Linotype Didot W01'; 
+	font-weight: 400;
+	font-style: italic;
+}
+
+.didot-italic {
+	@include didot-italic;
 }
 
 @mixin avenir {
-	font-family: 'Avenir LT W01 55 Roman', Arial, Helvetica, sans-serif;
+	font-family: 'Avenir W01';
+	font-weight: 400;
+	font-style: normal;
 }
 
 .avenir {
 	@include avenir;
 }
 
-@mixin novecento {
-	font-family: 'Novecento W00 Wide Bold', Arial, Helvetica, sans-serif;
+@mixin avenir-heavy {
+	font-family: 'Avenir W01';
+	font-weight: 800;
+	font-style: normal;
 }
 
-.novecento {
-	@include novecento;
+.avenir-heavy {
+	@include avenir-heavy;
+}
+
+@mixin sackers {
+	font-family: 'Sackers Gothic W01';
+	font-weight: 500;
+	font-style: normal;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.sackers {
+	@include sackers;
+}
+
+@mixin sackers-light {
+	font-family: 'Sackers Gothic W01'; 
+	font-weight: 200; 
+	font-style: normal;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.sackers-light {
+	@include sackers-light;
 }

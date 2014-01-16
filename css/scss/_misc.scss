@@ -2,6 +2,10 @@
    Misc
    ========================================================================== */
 
+img {
+	max-width: 100%;
+	height: auto;
+}
 
 .ir {
 	border:0;
@@ -172,6 +176,16 @@ hr {
 				@include opacity(0);
 				visibility: hidden;
 			}
+
+			.content {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				padding: 0 5em;
+				width: 100%;
+				@include box-sizing(border-box);
+				@include translateY(-50%);
+			}
 		}
 	}
 	
@@ -218,8 +232,9 @@ hr {
 			position: absolute;
 			top: 0;
 			display: inline-block;
-			background: #FFF;
-			background: rgba(#FFF, 0.8);
+			// background: #FFF;
+			// background: rgba(#FFF, 0.8);
+			background: none;
 			color: #585858;
 			margin-top: -1.5em;
 			&:hover,
@@ -239,14 +254,14 @@ hr {
 				left: 50%;
 				margin-left: -0.4em;
 				margin-top: -0.5em;
-				@extend [data-icon]:before;
+				@extend [class^="icon-"];
 			}
 
 			&.large {
 				height: 30em;
 				margin-top: -15em;
 
-				@include device-width(7){
+				@include device-width(7) {
 					height: 3em;
 					margin-top: -1.5em;
 				}
@@ -259,15 +274,14 @@ hr {
 		.prev-btn {
 			left: 0;
 			&:before {
-				@extend .icon-chevron-left:before;
+				@extend .icon-arrow-prev:before;
 			}
 		}
-
 
 		.next-btn {
 			right: 0;
 			&:before {
-				@extend .icon-chevron-right:before;
+				@extend .icon-arrow-next:before;
 			}
 		}
 	}
@@ -306,23 +320,11 @@ hr {
 	vertical-align: middle;
 }
 
-img.border {
-	border: 1px solid #DDDDDD;
-	@include box-shadow(0 5px 5px 0 rgba(#000 ,0.2));
-}
 
 blockquote {
 	padding: 0 0 0 2.5em;
 	position: relative;
 	margin: 1em 0;
-}
-
-.post-category {
-	font-size: 12px;
-
-	a {
-		color: #b50f0c;
-	}
 }
 
 .pagination {
@@ -651,16 +653,16 @@ blockquote {
 // 		.prev-btn {
 // 			left: 0;
 // 			&:before {
-// 				@extend [data-icon]:before;
-// 				@extend .icon-chevron-left:before;
+// 				@extend [class^="icon-"];
+// 				@extend .icon-arrow-left:before;
 // 			}
 // 		}
 
 // 		.next-btn {
 // 			right: 0;
 // 			&:before {
-// 				@extend [data-icon]:before;
-// 				@extend .icon-chevron-right:before;
+// 				@extend [class^="icon-"];
+// 				@extend .icon-arrow-right:before;
 // 			}
 // 		}
 // 	}
@@ -675,6 +677,10 @@ blockquote {
 	li {
 		float: left;
 		margin: 0 1.4em 0 0;
+
+		.title {
+			margin: 0.3em 0;
+		}
 	}
 }
 
@@ -683,89 +689,7 @@ blockquote {
 	//text-align: right;
 }
 
-.newsletter_wrapper {
-	margin: 0 !important;
 
-
-
-	.newsletter {
-		position: relative;
-
-		.validation_error {
-			display: none;
-		}
-
-
-		.gform_body {
-			
-			ul {
-
-				&.right_label,
-				&.left_label,
-				&.top_label {
-					li {
-						margin: 0;
-					}
-				}
-
-				.gfield {
-					.ginput_container {
-						input[type=text],
-						input[type=email],
-						input[type=url],
-						input[type=tel],
-						input[type=number],
-						input[type=password],
-						textarea {
-							background: #f8f8f8;
-							border: none;
-							width: 100%;
-						}
-					}
-				}
-			}
-		}
-
-		.gform_footer.top_label,
-		.gform_footer.left_label,
-		.gform_footer.right_label {
-			padding: 0;
-			margin: 0;
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: auto;
-
-			.button {
-				text-indent: -9999px;
-				position: relative;
-				padding: 0.7em 1.5em;
-				background: #f8f8f8;
-				@include box-shadow(none);
-				border: none;
-				&:before {
-					@extend [data-icon]:before;
-					@extend .icon-envelope:before;
-					position: absolute;
-					text-indent: 0;
-					top: 50%;
-					left: 50%;
-					margin-top: -6px;
-					margin-left: -6px;
-					color: #000;
-				}
-
-				&:hover {
-					background: #dbdbdb;
-				}
-			}
-
-			.gfield_description.validation_message {
-				margin-left: 0;
-			}
-		}
-	}
-}
 
 .accordion {
 	margin: 0;
@@ -789,8 +713,8 @@ blockquote {
 			}
 
 			&:before {
-				@extend [data-icon]:before;
-				@extend .icon-chevron-down:before;
+				@extend [class^="icon-"];
+				@extend .icon-arrow-down:before;
 				color: #dcdcdc;
 				position: absolute;
 				top: 50%;
@@ -810,6 +734,20 @@ blockquote {
 
 .zoomContainer {
 	z-index: 1000;
+}
+
+.page-header {
+
+	> .inner {
+		padding: 1em 0;
+		@include device-width(8) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+	.title {
+		margin: 0;
+	}
 }
 
 
@@ -923,11 +861,15 @@ blockquote {
 
 .widget_featured_products {
 
-	.widget-title {
-		border-bottom: 1px solid #989898;
-		padding: 0.6em 1em;
-		margin: 0 0 0.6em 0;
+	> .inner {
+		border: 1px solid #e3e3e3;
 	}
+
+	.widget-title {
+		margin: 3em 0;
+		@include font-size(0.8);
+	}
+
 	.products-scroller {
 
 		&:before {
@@ -951,13 +893,31 @@ blockquote {
 				display: inline-block;
 				height: 100%;
 			}
-			img {
-				height: 90%;
-			}
 		}
 	}
 }
 
+.widget_instagram {
+	> a {
+		background: #f5f5f5;
+		display: inline-block;
+		&:hover {
+			color: #FFF;
+			background: #000;
+		}
+
+		
+	}
+
+	.image {
+		img {
+			display: block;
+		}
+	}
+	.footer {
+		padding: 2em 0;
+	}
+}
 /* =============================================================================
    Lists
    ========================================================================== */

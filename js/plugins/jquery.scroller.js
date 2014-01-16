@@ -133,7 +133,7 @@
 				var scrollerPagination = $('.scroller-pagination');
 				$('li', scrollerPagination).removeClass('current');
 				$('li .btn[data-id='+nextItem.data('id')+']', scrollerPagination).parent().addClass('current');
-				if(options.resize) $('.scroller-mask', scroller).animate({height: nextItem.outerHeight()}, 500, 'easeInOutQuad');;
+				$('.scroller-mask', scroller).animate({height: nextItem.outerHeight()}, 500, 'easeInOutQuad');;
 				scroller.trigger('onChange', [nextItem]);
 				
 			}
@@ -234,11 +234,11 @@
 
 		function refresh(){
 			gotoItem($('.scroll-item:eq(0)', scroller).data('id'));
-			if(options.resize) scroller.css({height: currItem.outerHeight()});
+			scroller.css({height: currItem.outerHeight()});
 		}
 
 		function resizeScroller(){
-			if(options.resize) $('.scroller-mask', scroller).css({height: currItem.outerHeight()}, 500, 'easeInOutQuad');
+			$('.scroller-mask', scroller).css({height: currItem.outerHeight()}, 500, 'easeInOutQuad');
 		}
 		
 		init();

@@ -39,6 +39,7 @@ global $woocommerce;
 					<a class="logo" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
 				</h1>
 				<div class="navigation-container">
+					<!--button class="mobile-navigation-btn"></button-->
 					<?php wp_nav_menu( array( 'theme_location' => 'secondary_header', 'menu_class' => 'clearfix menu', 'container' => 'nav', 'container_class' => 'secondary-navigation navigation' )); ?>
 					<!--div class="cart">
 						<a href="<?php echo get_permalink(get_field('cart_page', 'options')); ?>" class="cart-btn" ><?php echo get_the_title(get_field('cart_page', 'options')); ?></a>
@@ -67,13 +68,12 @@ global $woocommerce;
 			<div class="inner container">
 				
 				<div class="navigation-container">
-					<?php get_search_form(); ?>
 					<!--a href="<?php echo get_permalink(get_field('cart_page', 'options')); ?>" class="cart-btn" >
 						<?php echo get_the_title(get_field('cart_page', 'options')); ?>:
 						<strong class="items"><?php echo sprintf(_n('%d', '%d', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?></strong>
 					</a-->
-					<button class="mobile-navigation-btn uppercase">menu <i aria-hidden="true" class="icon-arrow-down tiny"></i></button>
 					<?php wp_nav_menu( array( 'theme_location' => 'primary_header', 'menu_class' => 'clearfix menu', 'container' => 'nav', 'container_class' => 'primary-navigation' ) ); ?>
+					<?php get_search_form(); ?>
 				</div>
 			</div>
 		</div>
@@ -84,10 +84,12 @@ global $woocommerce;
 				'delimiter'		=> ' / ',
 				'wrap_before'	=> '<nav id="breadcrumbs"><div class="inner container">',
 				'wrap_after'	=> '</div></nav>',
-				'home'			=> _x( "Charlie May", 'breadcrumb', 'woocommerce' )
+				'before'		=> '<span>',
+				'after'			=> '</span>',
+				'home'			=> _x( "Home", 'breadcrumb', 'woocommerce' )
 		);
 		?>
-		<?php woocommerce_breadcrumb( $args ); ?>
+		<?php //woocommerce_breadcrumb( $args ); ?>
 	<?php //if ( function_exists('yoast_breadcrumb') ) yoast_breadcrumb('<div id="breadcrumbs"><div class="inner container">','</div></div>'); ?>
 	<?php endif; ?>
 	<div id="main" class="site-main" role="main">

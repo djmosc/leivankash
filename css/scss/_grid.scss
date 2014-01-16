@@ -2,17 +2,19 @@
    Grid
    ========================================================================== */
 
+.row {
+	> .container {
+		> .inner {
+			margin: 0 -10px;
+		}
+	}
+}
 .clearfix,
 .container {
-	*zoom: 1;
-
-	&:before,
-	&:after {
-	    content: " ";
-	    display: table;
-	}
 
 	&:after {
+		content: '';
+		display: table;
 		clear: both;
 	}
 }

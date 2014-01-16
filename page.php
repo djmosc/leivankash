@@ -13,14 +13,9 @@
 
 get_header(); ?>
 
-<div id="page" class="container">
+<div id="page">
 	<?php while ( have_posts() ) : the_post(); ?>
 	<div id="content" <?php post_class(); ?>>
-		<?php if(!$post->post_content == ''): ?>
-		<div class="page-content">
-			<?php the_content(); ?>
-		</div>
-		<?php endif; ?>
 		<?php if ( get_field('content')):?>
 		<?php get_template_part('inc/content'); ?>
 		<?php endif; ?>

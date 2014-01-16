@@ -11,6 +11,11 @@ button {
 	&:hover {
 		background: #ebebeb;
 	}
+
+	&:active,
+	&:focus {
+		outline: none;
+	}
 }
 
 
@@ -66,7 +71,7 @@ button {
 		vertical-align: bottom;
 		padding-right: 0.2em;
 		display: inline-block;
-		@extend [data-icon]:before;
+		@extend [class^="icon-"];
 	}
 }
 .facebook-btn {

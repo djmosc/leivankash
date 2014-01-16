@@ -13,20 +13,11 @@ module.exports = function(grunt) {
             options: {
                 keepSpecialComments: 0,
                 stripBanners: true,
-                banner: '/*\n Theme Name: <%= pkg.name %>\n'+
-                    'Theme URI: <%= pkg.homepage %>\n'+
-                    'Author: <%= pkg.author.name %>\n'+
-                    'Author URI: <%= pkg.author.url %>\n'+
-                    'Description: <%= pkg.description %>\n'+
-                    'Version: <%= pkg.version %>\n'+
-                    'License: <%= pkg.license %>\n'+
-                    'License URI: license.txt\n'+
-                    'Tags: <%= pkg.keywords %>\n'+
-                    'Date compiled: <%= grunt.template.today("yyyy-mm-dd h:MM:ss") %>\n*/\n\n',
+                banner: '/*\n Date compiled: <%= grunt.template.today("yyyy-mm-dd h:MM:ss") %>\n*/\n\n',
             },
             live: {
                 files: {
-                    'style.css': ['css/style.css']
+                    'css/style.min.css': ['css/style.css']
                 }
             }
         },
@@ -42,6 +33,9 @@ module.exports = function(grunt) {
                 }
             }
         },
+        jshint: {
+            all: ['Gruntfile.js', 'js/main.js']
+        },
         uglify: {
              options: {
                 stripBanners: true,
@@ -55,15 +49,25 @@ module.exports = function(grunt) {
         },
         watch: {
             options: {
-               spawn: false
+               spawn: true
             },
             css: {
                 files: ['css/scss/*.scss'],
-                tasks: ['compass', 'notify:watch'],
-                options: {
-                   livereload: true
-                }
-            }
+                tasks: ['compass', 'notify:watch']
+            },
+            livereload: {
+                options: { 
+                    livereload: true 
+                },
+                files: ['css/style.css'],
+            },//,
+            // js: {
+            //     files: ['js/main.js'],
+            //     tasks: ['jshint'],
+            //     options: {
+            //        livereload: true
+            //     }
+            // }
         },
         notify: {
             watch: {
@@ -80,6 +84,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-notify');
 
     grunt.registerTask('default', ['compass', 'concat:plugins', 'uglify']);

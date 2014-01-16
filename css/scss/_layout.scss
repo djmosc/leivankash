@@ -2,40 +2,40 @@ html {
 	height: 100%;
 	font-size: 62.5%;
 	
-	@include device-width(10) {
-		font-size: 61%;
-	}
+	// @include device-width(10) {
+	// 	font-size: 61%;
+	// }
 
-	@include device-width(9) {
-		font-size: 60%;
-	}
+	// @include device-width(9) {
+	// 	font-size: 60%;
+	// }
 
-	@include device-width(8) {
-		font-size: 59%;
-	}
+	// @include device-width(8) {
+	// 	font-size: 59%;
+	// }
 
-	@include device-width(7) {
-		font-size: 58%;
-	}
+	// @include device-width(7) {
+	// 	font-size: 58%;
+	// }
 
-	@include device-width(6) {
-		font-size: 57%;
-	}
+	// @include device-width(6) {
+	// 	font-size: 57%;
+	// }
 
-	@include device-width(5) {
-		font-size: 56%;
-	}
+	// @include device-width(5) {
+	// 	font-size: 56%;
+	// }
 
-	@include device-width(4) {
-		font-size: 55%;
-	}
+	// @include device-width(4) {
+	// 	font-size: 55%;
+	// }
 }
 
 body {
 	height: 100%;
 	background: #FFF;
 	color: #333333;
-	@include font-size(12);
+	@include font-size(13);
 	line-height: 1.6;
 	min-width: 250px;
 	@include avenir;
@@ -58,6 +58,7 @@ body {
 	position: relative;
 	z-index: 200;
 	border-top: 2em solid #000;
+	margin-bottom: 10px;
 
 	@media print {
 		display: none;
@@ -66,41 +67,59 @@ body {
 	> .bottom {
 		border-top: 1px solid #e1e1e1;
 		border-bottom: 1px solid #e1e1e1;
+		@include box-shadow(0px -10px 20px 0 rgba(#000, 0.05));
+		
 		> .inner {
-			background: url(../misc/stripes.png);
-			padding-bottom: 2em;
+			&:after {
+				content: '';
+				background: url(../images/misc/stripes.png);
+				position: absolute;
+				display: block;
+				width: 100%;
+				height: 11px;
+			}
 		}
 	}
+
+	$logo_ratio: (100 / 136);
+		
 	.logo-container {
-		$ratio: (26 / 218);
-		height: $ratio * 218px;
+		display: inline-block;
 		position: absolute;
 		left: 50%;
 		top: 50%;
-		margin-top: 0;
-		margin-bottom: 0;
-		line-height: 0;
-		text-align: center;
-		@include transition(all 0.3s ease);
+		margin: 0;
 		z-index: 0;
-
-		// @include device-width(12) {
-		// 	height: $ratio * 400px;
-		// 	width: 400px;
-		// }
+		display: inline-block;
+		font-size: 1em;
+		line-height: 1;
+		margin-top: -(100px / 2);
+		margin-left: -(136px / 2);
 		
-		// @include device-width(10) {
-		// 	height: $ratio * 350px;
-		// 	width: 350px;
-		// }
+
+		@include device-width(10) {
+			margin-left: 0;
+			left: 0;
+		}
 
 		@include device-width(8) {
-			text-align: left;
+			margin-left: 2em;
+			margin-top: -($logo_ratio * 110px) / 2;
 		}
 
-		@include device-width(4) {
-			text-align: center;
+		@include device-width(7) {
+			position: relative;
+			top: 0;
+			margin-top: 0;
+			padding: 2em 0;
 		}
+
+
+		@include device-width(5) {
+			padding: 1em 0;
+			margin-left: 1em;
+		}
+
 	}
 
 	.logo {
@@ -108,10 +127,20 @@ body {
 		@include transition(all 0.3s ease);
 		background: url(../images/logos/leivankash_header.jpg) no-repeat;
 		background-size: contain;
-		width: 218px;
-		height: 100%;
+		width: 136px;
+		height: 0;
 		text-indent: -9999px;
-		display: inline-block;
+		display: block;
+		padding-top: $logo_ratio * 100%;
+
+
+		@include device-width(8) {
+			width: 110px;
+		}
+
+		@include device-width(5) {
+			width: 90px;
+		}
 	}
 
 	
@@ -125,14 +154,7 @@ body {
 	// 	border-top: 1px solid #000;
 	// 	border-bottom: 1px solid #cecece;
 	
-	// 	.mobile-navigation-btn {
-	// 		display: none;
-	// 		padding: 1em 2em;
-	// 		border-right: 1px solid #cecece;
-	// 		@include device-width(6) {
-	// 			display: block;
-	// 		}
-	// 	}
+		
 
 	// 	.cart-btn {
 	// 		display: none;
@@ -147,10 +169,19 @@ body {
 	// 		}
 	// 	}
 	// }
-	
+
+	// .mobile-navigation-btn {
+	// 	display: none;
+	// 	padding: 1em 2em;
+	// 	border-right: 1px solid #cecece;
+	// 	@include device-width(7) {
+	// 		display: block;
+	// 	}
+	// }
+
 
 	.mini-cart {
-		//display: none;
+		display: none;
 		position: absolute;
 		top: 100%;
 		right: 0;
@@ -169,6 +200,17 @@ body {
 	}
 
 	.secondary-navigation {
+		padding: pxtoem(50) 0;
+
+		@include device-width(8) {
+			padding-left: 2em;
+			padding-right: 2em;
+		}
+
+		@include device-width(7) {
+//			padding: 0;
+			display: none;
+		}
 		.menu {
 			padding: 0;
 			margin: 0;
@@ -176,18 +218,68 @@ body {
 
 			li {
 				float: left;
-				margin-right: 4em;
+				margin-right: 6em;
 				position: relative;
+
+				@include device-width(10) {
+					float: right;
+					margin-right: 0;
+					margin-left: 3em;
+				}
+
+				@include device-width(7) {
+					float: none;
+					margin: 0;
+				}
+
+				
 
 				&.right {
 					float: right;
 					margin-right: 0;
-					margin-left: 4em;
+					margin-left: 6em;
+
+					@include device-width(10) {
+						margin-left: 3em;
+						// float: left;
+						// margin-right: 4em;
+						// margin-left: 0;
+					}
+
+					@include device-width(7) {
+						float: none;
+						margin: 0;
+					}
 				}
 
+				&.bag { 
+					a {
+						&:before {
+							@extend [class^="icon-"];
+							@extend .icon-bag:before;
+							margin-right: 0.5em;
+						}
+					}
+				}
+
+				
 				> a {
 					display: inline-block;
-					line-height: pxtoem(140);
+					color: #656565;
+					line-height: 1.3;
+					@include sackers;
+					padding: 1em 0;
+					@include font-size(0.8);
+					@include transition(none);
+
+					&:hover {
+						color: #bb0000;
+					}
+
+					@include device-width(7) {
+						display: block;
+						padding: 1em 2em;
+					}
 				}
 				ul {
 					display: none;
@@ -197,7 +289,113 @@ body {
 	}
 
 	.primary-navigation {
+		.menu {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			@include device-width(7) {
 
+			}
+
+			> li {
+				float: left;
+				position: relative;
+				margin-right: 6em;
+
+				@include device-width(8) {
+					margin-right: 0;
+					border-left: 1px solid #cecece;
+				}
+				&.center {
+					margin-right: 0;
+					border-left: 1px solid #cecece;
+
+					> a {
+						@include didot;
+						@include font-size(16);
+						padding: 0 1em;
+
+						@include device-width(8) {
+							@include sackers;
+							@include font-size(0.8);
+						}
+					}
+				}
+
+				> a {
+					color: #656565;
+					display: inline-block;
+					line-height: 50px;
+					@include sackers;
+					@include font-size(0.8);
+					@include transition(none);
+
+					&:hover {
+						color: #bb0000;
+					}
+
+
+					@include device-width(8) {
+						padding: 0 1em;
+					}
+				}
+
+				&:hover {
+			 		> .sub-menu {
+			 			// display: block;
+			 			visibility: visible;
+			 			@include opacity(1);
+			 			@include device-width(6) {
+			 				visibility: hidden;
+			 				@include opacity(0)	
+			 			}
+			 		}
+			 	}
+				
+			 	ul {
+	 				padding: 0;
+	 				margin: 0;
+	 				list-style: none;
+	 			}
+
+				> .sub-menu {
+			 		position: absolute;
+			 		top: 100%;
+			 		border-left: 1px solid #e1e1e1;
+			 		border-right: 1px solid #e1e1e1;
+			 		border-top: 1px solid #e1e1e1;
+			 		min-width: 100%;
+			 		margin-left: -1px;
+			 		visibility: hidden;
+			 		@include opacity(0);
+			 		@include transition(all 0.3s ease);
+					z-index: 2000;
+
+			 		li {
+			 			margin: 0;
+			 			padding: 0;
+			 			background: #FFF;
+			 			
+			 			a {
+			 				@include sackers;
+			 				@include font-size(0.8);
+			 				padding: 0 1.5em;
+			 				line-height: 50px;
+			 				display: block;
+			 				text-align: center;
+							text-transform: uppercase;
+							border-bottom: 1px solid #e1e1e1;
+
+			 				&:hover {
+			 					color: #aa262f;
+			 				}
+			 			}
+
+			 			
+			 		}
+			 	}
+			}
+		}
 	}
 
 	// .main-navigation { 
@@ -294,7 +492,7 @@ body {
 	// 		 			}
 
 	// 		 			&:after {
-	// 		 				@extend [data-icon]:before;
+	// 		 				@extend [class^="icon-"];
 	// 		 				@extend .icon-chevron-down:before;
 	// 		 				color: #dcdcdc;
 	// 		 				font-size: 80%;
@@ -307,48 +505,18 @@ body {
 	// 		 	}
 
 			 	
-	// 		 	> .sub-menu {
-	// 		 		position: absolute;
-	// 		 		top: 40px;
-	// 		 		//border: 1px solid #2f2f2f;
-	// 		 		width: 180px;
-	// 		 		margin: 0;
-	// 		 		left: -1em;
-	// 		 		list-style: none;
-	// 		 		padding: 6px 0 0 0;
-	// 		 		//display: none;
-	// 		 		visibility: hidden;
-	// 		 		@include opacity(0);
-	// 		 		@include transition(all 0.3s ease);
-	// 				border-bottom: 1px solid #000;
-	// 				z-index: 2000;
-
-	// 		 		li {
-	// 		 			margin: 0;
-	// 		 			padding: 0;
-	// 		 			background: #FFF;
-	// 		 			a {
-	// 		 				padding: 0.8em 1.5em;
-	// 		 				display: block;
-	// 		 				text-align: left;
-	// 						text-transform: uppercase;
-
-	// 		 				&:hover {
-	// 		 					color: #aa262f;
-	// 		 				}
-	// 		 			}
-	// 		 		}
-	// 		 	}
+	
 	// 		}
 	// 	} 
 	// }
 
 	.search-form {
 		position: absolute;
-		top: 0;
+		top: 50%;
 		right: 0;
+		margin-top: -13px;
 
-		@include device-width(4){
+		@include device-width(5) {
 			display: none;
 		}
 	}
@@ -357,7 +525,7 @@ body {
 			
 #main {
 	position: relative;
-	z-index: 500;
+	z-index: 100;
 	padding: 0 0 2em 0;
 }
 		
@@ -367,63 +535,76 @@ body {
 	
 #footer {
 	background: #000;
-	color: #666666;
-	margin-top: 2em;
+	color: #424242;
 	
 	@media print {
 		display: none;
 	}
 	
 	a {
-		color: #c6c6c6;
+		color: #b3b3b3;
 
 		&:hover {
 			color: #FFF;
 		}
 	}
-	> .top {
-		> .inner {
-			padding: 3em 0;
-			border-bottom: 1px solid #4c4c4c;
+
+	> .inner {
+		padding: 2em 0;
+
+		@include device-width(6) {
+			padding: 10px 0;
 		}
 	}
 
-	> .bottom {
-		> .inner {
-			padding: 1em 0 3em 0;
-		}
-	}
+	// > .top {
+	// 	> .inner {
+	// 		padding: 3em 0;
+	// 	}
+	// }
 
-	.social-links {
-		a {
-			&:hover {
-				border-bottom: none;
-			}
-		}
-	}
+	// > .bottom {
+	// 	> .inner {
+	// 		padding: 1em 0 3em 0;
+	// 	}
+	// }
 
+
+	$logo_ratio: (92 / 125);
+		
 	.logo-container {
 		margin: 0;
-		padding: 0;
-		line-height: 0;
+		z-index: 0;
+		display: inline-block;
+		font-size: 1em;
+		line-height: 1;
 		position: relative;
-		z-index: 500;
 
 		@include device-width(8) {
-			float: none;
-			width: auto;
+			padding-left: 2em;
+		}
+		@include device-width(5) {
+			padding-left: 10px;
+		}
+	}
+
+	.logo {
+		z-index: 100;
+		background: url(../images/logos/leivankash_footer.jpg) no-repeat;
+		background-size: contain;
+		width: 125px;
+		height: 0;
+		text-indent: -9999px;
+		display: block;
+		padding-top: $logo_ratio * 100%;
+
+
+		@include device-width(8) {
+			width: 110px;
 		}
 
-		.logo {
-			background: url(../images/logos/leivankash_footer.jpg) no-repeat;
-			width: 220px;
-			height: 24px;
-			display: inline-block;
-			text-indent: -9999px;
-
-			&:hover {
-				border-bottom: none;
-			}
+		@include device-width(5) {
+			width: 90px;
 		}
 	}
 
@@ -431,7 +612,8 @@ body {
 		@include device-width(8) {
 			float: right;
 			width: auto;
-			margin: 2em 0 0 0;
+			margin: 0;
+			padding-right: 10px;
 		}
 		ul {
 			margin: 0 0 0 -10em;
@@ -444,7 +626,7 @@ body {
 			
 			li {
 				float: right;
-				margin: 0.2em 0 0.2em 10em;
+				margin: 0 0 0 7em;
 
 				@include device-width(11) {
 					margin-left: 5em;
@@ -463,7 +645,6 @@ body {
 					text-transform: uppercase;
 					letter-spacing: 2px;
 					@include font-size(10);
-					color: #FFF;
 					padding-bottom: 0.2em;
 					@include transition(all 0.3s ease);
 
@@ -476,46 +657,9 @@ body {
 		}
 	}
 
-	.secondary-footer-navigation {
-		margin: 2em 0 0 0;
-		clear: left;
-
+	.copyright {
 		@include device-width(8) {
-			width: auto;
-		}
-		ul {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-			li {
-				margin: 0em 0;
-				line-height: 1.2;
-				a {
-
-					text-transform: uppercase;
-					letter-spacing: 2px;
-					@include font-size(8);
-					color: #c6c6c6;
-
-					&:hover {
-						color: #FFF;
-					}
-				}
-			}
-		}
-	}
-	
-
-	.footer-navigation {
-		margin: 0.8em;
-		ul {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			li {
-				float: left;
-				padding: 0 1em;
-			}
+			padding: 0 10px;
 		}
 	}
 }
@@ -541,8 +685,7 @@ body {
 	@media print {
 		display: none;
 	}
-
-	@include font-size(8);
+	@include sackers;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	position: relative;
@@ -551,7 +694,15 @@ body {
 	margin: 0 0 0 0;
 	> .inner {
 		padding: 1.2em 0;
-		border-bottom: 1px solid #dcdcdc;
+
+		@include device-width(8) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+	
+	span {
+		@include font-size(8);
 	}
 	a {
 	
@@ -559,10 +710,54 @@ body {
 }
 
 #social {
+	border-top: 1px solid #e3e3e3;
+
 	> .inner {
-		border-top: 1px solid #808080;
-		border-bottom: 1px solid #808080;
-		padding: 0.8em 0;
+		border-left: 1px solid #e3e3e3;
+		border-right: 1px solid #e3e3e3;
+
+		&:before {
+			content: '';
+			background: url(../images/misc/stripes.png);
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 1em;
+		}
+	}
+
+	.customer-service-navigation-container {
+		padding: 2em 1.5em;
+		border-right: 1px solid #e3e3e3;	
+	}
+
+	.newsletter-container {
+		padding: 2em 1.5em;
+		border-bottom: 1px solid #e3e3e3;	
+	}
+
+	.social-links-container {
+		padding: 1.4em 1.5em;
+		border-right: 1px solid #e3e3e3;
+	}
+
+	.cards-container {
+		padding: 0.5em 1.5em;
+	}
+
+	.customer-service-navigation {
+		.menu {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+
+			li {
+				a {
+					@include sackers;
+					@include font-size(8);
+				}
+			}
+		}
 	}
 }
 /* =============================================================================
@@ -572,106 +767,111 @@ body {
 
 #front-page {
 
-	#homepage-scroller {
-		$ratio: 1 / 2;
-		//min-height: $ratio * 1156px;
-		z-index: 100;
-		margin-bottom: 1em;
-		position: relative;
-		&:before {
-			content: '';
-			display: block;
-			padding-top: $ratio * 100%;
-		}
+	// #homepage-scroller {
+	// 	$ratio: 1 / 2;
+	// 	//min-height: $ratio * 1156px;
+	// 	z-index: 100;
+	// 	margin-bottom: 1em;
+	// 	position: relative;
+	// 	&:before {
+	// 		content: '';
+	// 		display: block;
+	// 		padding-top: $ratio * 100%;
+	// 	}
 
-		> .inner {
-			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			right: 0;
-		}
+	// 	> .inner {
+	// 		position: absolute;
+	// 		top: 0;
+	// 		left: 0;
+	// 		bottom: 0;
+	// 		right: 0;
+	// 	}
 
-		.scroller-mask {
-			height: 100%;
-		}
+	// 	.scroller-mask {
+	// 		height: 100%;
+	// 	}
 	
-		.scroll-item {
-			height: 100%;
-			background-position: center center;
-			background-size: cover;
-			background-repeat: no-repeat;
+	// 	.scroll-item {
+	// 		height: 100%;
+	// 		background-position: center center;
+	// 		background-size: cover;
+	// 		background-repeat: no-repeat;
 
-			> .inner {
-				height: 100%;
-			}
-			.content {
-				position: absolute;
-				top: 50%;
-				left: 0;
-				margin-top: -4em;
+	// 		> .inner {
+	// 			height: 100%;
+	// 		}
+	// 		.content {
+	// 			position: absolute;
+	// 			top: 50%;
+	// 			left: 0;
+	// 			margin-top: -4em;
 
-				@include device-width(6) {
-					top: 0;
-					position: relative;
-					margin-top: 2em;
-				}
+	// 			@include device-width(6) {
+	// 				top: 0;
+	// 				position: relative;
+	// 				margin-top: 2em;
+	// 			}
 
-				&.center {
-					width: 100%;
-					text-align: center;
+	// 			&.center {
+	// 				width: 100%;
+	// 				text-align: center;
 
-					* {
-						margin-left: auto;
-						margin-right: auto;
-					}
-				}
+	// 				* {
+	// 					margin-left: auto;
+	// 					margin-right: auto;
+	// 				}
+	// 			}
 
-				&.right {
-					width: 100%;
-					text-align: right;
+	// 			&.right {
+	// 				width: 100%;
+	// 				text-align: right;
 
-					hr {
-						float: right;
-						& + * {
-							clear: both;
-						}
-					}
-				}
-				.csstransform & {
-					margin-top: 0;
-					@include translateY(-50%);
-				}
-			}
-		}
+	// 				hr {
+	// 					float: right;
+	// 					& + * {
+	// 						clear: both;
+	// 					}
+	// 				}
+	// 			}
+	// 			.csstransform & {
+	// 				margin-top: 0;
+	// 				@include translateY(-50%);
+	// 			}
+	// 		}
+	// 	}
 
-		.scroller-navigation {
-			@include device-width(6) {
-				left: 0;
-				right: auto;
-			}
-		}
-	}
+	// 	.scroller-navigation {
+	// 		@include device-width(6) {
+	// 			left: 0;
+	// 			right: auto;
+	// 		}
+	// 	}
+	// }
 
 	#widgets {
 		> .container {
 			> .inner {
 				margin-left: -10px;
 				margin-right: -10px;
+
+				@include device-width(8) {
+					margin-left: 0;
+					margin-right: 0;
+				}
 			}
 		}
 		.widget {
 			margin-bottom: 0;
-			@include device-width(8){
+			@include device-width(8) {
 				width: 50%;
 			}
 
-			@include device-width(4){
+			@include device-width(4) {
 				width: 100%;
 			}
 
 			&.widget_featured_products {
-				@include device-width(8){
+				@include device-width(8) {
 					display: none;
 				}
 			}
@@ -679,16 +879,7 @@ body {
 	}
 
 	#content {
-		margin: 4em 0;
 		z-index: 200;
-
-		@include device-width(5) {
-			margin: 2em 0;
-		}
-
-		@include device-width(4) {
-			margin: 1em 0;
-		}
 	}
 }
 

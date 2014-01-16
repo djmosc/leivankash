@@ -14,9 +14,16 @@
 
 get_header(); ?>
 <section id="front-page" class="clearfix">
+	<?php if ( get_field('content')) :?>
+	<div id="content">
+		<?php if ( get_field('content')):?>
+		<?php get_template_part('inc/content'); ?>
+		<?php endif; ?>
+	</div>
+	<?php endif; ?>
 	<?php if ( get_field('slides')) :?>
 		<div id="homepage-scroller" class="scroller" data-auto-scroll="true" >
-			<div class="inner">
+			<div class="inner container">
 				<div class="scroller-mask">
 					<?php $i = 0; ?>
 					<?php while (the_repeater_field('slides')) : ?>
@@ -43,20 +50,11 @@ get_header(); ?>
 
 	<div id="widgets">
 		<div class="container">
-			<div class="inner">
+			<div class="inner clearfix">
 				<?php dynamic_sidebar('homepage_content'); ?>
 			</div>
 		</div>
 	</div>
-	<?php if ( get_field('content')) :?>
-	<div id="content">
-		<div class="container">
-			<?php if ( get_field('content')):?>
-			<?php get_template_part('inc/content'); ?>
-			<?php endif; ?>
-		</div>
-	</div>
-	<?php endif; ?>
 </section><!-- #front-page -->
 
 <?php get_footer(); ?>

@@ -11,73 +11,62 @@
 	</div><!-- #main .site-main -->
 	<div id="social">
 		<div class="inner container">
-			<div class="span six alpha hide-on-mobile">
-
-				<ul class="social-links">
-					<li>
-						<h5 class="uppercase title"><?php _e("Join Us", THEME_NAME); ?></h5>
-					</li>
-					<li>
-						<a class="facebook-btn" href="<?php echo get_field('facebook_url', 'options');?>" target="_blank"></a>
-					</li>
-					<li>
-						<a class="twitter-btn" href="<?php echo get_field('twitter_url', 'options');?>" target="_blank"></a>
-					</li>
-					<li>
-						<a class="instagram-btn" href="<?php echo get_field('instagram_url', 'options');?>" target="_blank"></a>
-					</li>
-					<li>
-						<a class="tumblr-btn" href="<?php echo get_field('tumblr_url', 'options');?>" target="_blank"></a>
-					</li>
-					<li>
-						<a class="pinterest-btn" href="<?php echo get_field('pinterest_url', 'options');?>" target="_blank"></a>
-					</li>
-				</ul>
+			<div class="span three hide-on-mobile customer-service-navigation-container">
+				<h6 class="title uppercase"><?php _e("Customer Service", THEME_NAME); ?></h6>
+				<?php wp_nav_menu( array( 'theme_location' => 'customer_service', 'menu_class' => 'clearfix menu', 'container' => 'nav', 'container_class' => 'customer-service-navigation navigation' )); ?>
+				<?php //wp_nav_menu( array( 'theme_location' => 'primary_footer', 'menu_class' => 'clearfix menu', 'container' => false ) ); ?>				
 			</div>
-			<div class="span three right omega alpha break-on-mobile">
-				<?php gravity_form(1, false, false); ?>
+			<div class="span seven right alpha omega break-on-mobile">
+				<div class="newsletter-container">
+					<?php gravity_form(1); ?>
+				</div>
+
+				<div class="clearfix">
+					<div class="span five social-links-container break-on-tablet">
+						<ul class="social-links">
+							<li>
+								<h6 class="title"><?php _e("Find us here", THEME_NAME); ?></h6>
+							</li>
+							<li>
+								<a class="facebook-btn" href="<?php echo get_field('facebook_url', 'options');?>" target="_blank"></a>
+							</li>
+							<li>
+								<a class="twitter-btn" href="<?php echo get_field('twitter_url', 'options');?>" target="_blank"></a>
+							</li>
+							<li>
+								<a class="instagram-btn" href="<?php echo get_field('instagram_url', 'options');?>" target="_blank"></a>
+							</li>
+							<li>
+								<a class="tumblr-btn" href="<?php echo get_field('tumblr_url', 'options');?>" target="_blank"></a>
+							</li>
+							<li>
+								<a class="pinterest-btn" href="<?php echo get_field('pinterest_url', 'options');?>" target="_blank"></a>
+							</li>
+						</ul>
+					</div>
+					<div class="span five cards-container hide-on-tablet">
+						<img src="<?php echo get_template_directory_uri(); ?>/images/misc/cards.jpg" />
+					</div>
+				</div>
 			</div>
 
 		</div>
 	</div>
 	<footer id="footer" class="site-footer" role="contentinfo">
-		<div class="top">
-			<div class="container inner">
-				<h1 class="logo-container span three alpha">
-					<a class="logo" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-				</h1>
-				<nav role="navigation" class="span seven omega primary-footer-navigation">
-					<?php wp_nav_menu( array( 'theme_location' => 'primary_footer', 'menu_class' => 'clearfix menu', 'container' => false ) ); ?>
-				</nav>
-				<nav role="navigation" class="span three alpha secondary-footer-navigation">
-					<?php wp_nav_menu( array( 'theme_location' => 'secondary_footer', 'menu_class' => 'menu', 'container' => false ) ); ?>
-				</nav>
-			</div>
-		</div>
-		<div class="bottom">
-				<div class="break-on-tablet span three alpha">
-					<ul class="social-links">
-						<li>
-							<a class="facebook-btn" href="<?php echo get_field('facebook_url', 'options');?>" target="_blank"></a>
-						</li>
-						<li>
-							<a class="twitter-btn" href="<?php echo get_field('twitter_url', 'options');?>" target="_blank"></a>
-						</li>
-						<li>
-							<a class="instagram-btn" href="<?php echo get_field('instagram_url', 'options');?>" target="_blank"></a>
-						</li>
-						<li>
-							<a class="tumblr-btn" href="<?php echo get_field('tumblr_url', 'options');?>" target="_blank"></a>
-						</li>
-						<li>
-							<a class="pinterest-btn" href="<?php echo get_field('pinterest_url', 'options');?>" target="_blank"></a>
-						</li>
-					</ul>
+		<div class="container inner">
+			<div class="clearfix top">
+				<div class="span three alpha">
+					<h1 class="logo-container">
+						<a class="logo" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+					</h1>
 				</div>
-				<div class="break-on-tablet span seven alpha omega">
+				<?php wp_nav_menu( array( 'theme_location' => 'primary_footer', 'menu_class' => 'clearfix menu', 'container' => 'nav', 'container_class' => 'span seven omega primary-footer-navigation navigation' ) ); ?>
+			</div>		
+			<div class="bottom">
+				<div class="copyright">
 					<p class="small text-right">
-						&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?> <?php _e(" | All Rights Reserved | Site by", THEME_NAME);?>
-						<a href="http://parkandcube.com" target="_blank">Park &amp; Cube</a> and <a href="http://www.mindblownmedia.com" target="_blank">Mind Blown Media</a>
+						&copy; Copyright <?php bloginfo( 'name' ); ?> 2011-<?php echo date('Y'); ?>.  <?php _e("Registered In England and Wales. Registration number OC361044.", THEME_NAME);?><br />
+						<?php _e("Site by", THEME_NAME); ?> <a href="http://parkandcube.com" target="_blank">Park &amp; Cube</a> and <a href="http://www.mindblownmedia.com" target="_blank">Mind Blown Media</a>
 					</p>
 				</div>
 			</div>
