@@ -1,1 +1,4 @@
-Wordpress theme for Charlie May
+leivankash
+==========
+
+Wordpress theme for LeiVanKash
