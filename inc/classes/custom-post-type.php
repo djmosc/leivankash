@@ -141,7 +141,7 @@ class Custom_Post_Type
 							$taxonomy_args
 
 						);
-
+						
 						// Add the taxonomy to the post type
 						register_taxonomy( $taxonomy_name, $post_type_name, $args );
 					}

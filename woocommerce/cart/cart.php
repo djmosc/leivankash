@@ -15,11 +15,11 @@ $woocommerce->show_messages();
 ?>
 
 <?php do_action( 'woocommerce_before_cart' ); ?>
-<ul class="checkout-progress">
+<!--ul class="checkout-progress">
 	<li class="current"><?php _e('Bag', THEME_NAME); ?></li>
 	<li><?php _e('Payment', THEME_NAME); ?></li>
 	<li><?php _e('Confirmation', THEME_NAME); ?></li>
-</ul>
+</ul-->
 <header class="cart-header clearfix">
 	<div class="span alpha seven break-on-tablet">
 		<h3><?php echo sprintf(_n('You have <span class="red">%d</span> item in your bag', 'You have <span class="red">%d</span> items in your bag', $woocommerce->cart->cart_contents_count), $woocommerce->cart->cart_contents_count);?></h3>
@@ -81,7 +81,7 @@ $woocommerce->show_messages();
                    				if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $values['quantity'] ) )
                    					echo '<p class="backorder_notification">' . __( 'Available on backorder', 'woocommerce' ) . '</p>';
 
-                   				echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf('<a href="%s" class="remove-btn" title="%s">Remove</a>', esc_url( $woocommerce->cart->get_remove_url( $cart_item_key ) ), __( 'Remove this item', 'woocommerce' ) ), $cart_item_key );
+                   				echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf('<a href="%s" class="remove-btn" title="%s">Remove from bag</a>', esc_url( $woocommerce->cart->get_remove_url( $cart_item_key ) ), __( 'Remove this item', 'woocommerce' ) ), $cart_item_key );
 							?>
 						</td>
 

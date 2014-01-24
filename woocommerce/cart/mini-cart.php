@@ -1,14 +1,17 @@
-<?php global $woocommerce; ?>
-<?php //if ( sizeof( $woocommerce->cart->get_cart() ) > 0 && isset($_GET['added-to-cart'])) :?>
+<?php 
+	global $woocommerce; 
+	$cart = $woocommerce->cart->get_cart();
+	if ( sizeof( $cart ) > 0 ) : 
+?>
 <div class="mini-cart">
 	<button class="close-btn">&times;</button>
 	<header class="header">
-		<h5 class="uppercase text-center novecento no-margin"><?php _e("Recently Added", THEME_NAME); ?></h5>
+		<h5 class="title"><?php _e("Recently Added", THEME_NAME); ?></h5>
 	</header>
 	<div class="products">
-	<?php foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) :
+	<?php foreach ( $cart as $cart_item_key => $values ) :
 		$_product = $values['data'];
-			if ( $_product->exists() && $values['quantity'] > 0  && $values['product_id'] == $_GET['added-to-cart']) : ?>
+			if ( $_product->exists() && $values['quantity'] > 0) : ?>
 		<div class="product clearfix">
 			<div class="span three thumbnail alpha">
 			<?php
@@ -40,8 +43,7 @@
 	<?php endforeach; ?>
 	</div>
 	<footer class="footer">
-		<a href="<?php echo get_permalink(get_field('cart_page', 'options')); ?>" class="white-btn"><?php _e("View Bag", THEME_NAME); ?></a>
-		<a href="<?php echo get_permalink(get_field('cart_page', 'options')); ?>" class="black-btn"><?php _e("Checkout", THEME_NAME); ?></a>
+		<a href="<?php echo get_permalink(get_field('cart_page', 'options')); ?>" class="checkout-btn black-btn"><?php _e("Checkout", THEME_NAME); ?></a>
 	</footer>
 </div>
-<?php //endif; ?>
+<?php endif; ?>

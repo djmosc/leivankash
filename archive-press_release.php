@@ -11,27 +11,39 @@
  * @package leivankash
  * @since leivankash 1.0
  */
+global $wp_query;
 get_header(); ?>
 
 <div id="archive-press-release">
-	<div class="scroller" data-scroll-all="true" data-resize="true">
-		<div class="scroller-mask">
-			<div class="scroll-items-container">
+	<div class="inner container">
+		<div id="sidebar" class="span one-fourth alpha">
+			<button class="mobile-sidebar-btn"></button>
+			<?php dynamic_sidebar('press'); ?>
+		</div>
+		<div id="content" class="span seven-and-half omega break-on-tablet">
+			<header class="header">
+				<?php if(is_tax('press_category')): ?>
+				<h5 class="page-title"><?php  ?></h5>
+				<?php else: ?>
+				<h5 class="page-title"><?php _e("View All", THEME_NAME); ?></h5>
+				<?php endif; ?>
+			</header>
+			<?php get_template_part('inc/options'); ?>
+			<div class="press-releases clearfix">
 			<?php $i = 0; ?>
+			<?php //print_r($wp_query); ?>
 			<?php while ( have_posts() ) : the_post(); ?>
-				<div class="scroll-item <?php if($i == 0) echo 'current'; ?>" data-id="<?php the_ID(); ?>">
-					<?php the_post_thumbnail('custom_medium', array('class' => 'scale')); ?>
-					<h5><?php the_title(); ?></h5>
+				<div class="press-release span one-third">
+					<a href="<?php the_permalink(); ?>">
+						<?php the_post_thumbnail('press_release_thumbnail', array('class' => 'scale')); ?>
+						<h6 class="title"><?php the_title(); ?></h6>
+					</a>
 				</div>
 			<?php $i++; ?>
 			<?php endwhile; ?>
 			</div>
+			<?php get_template_part('inc/options'); ?>
 		</div>
-		<nav class="scroller-navigation">
-			<button class="prev-btn large"></button>
-			<button class="next-btn large"></button>
-		</nav>
-
 	</div>
 </div>
 

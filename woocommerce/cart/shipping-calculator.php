@@ -86,9 +86,11 @@ if ( get_option('woocommerce_enable_shipping_calc')=='no' || ! $woocommerce->car
 		</div>
 		
 		<?php $woocommerce->nonce_field('cart') ?>
+			<p><?php _e("Shipments to P.O. Box delivery addresses can only be handled by our FedEx delivery option. Should you wish to choose the standard delivery, please email us an alternative address other than the P.O.Box.", THEME_NAME); ?>
 
-		<p><?php _e("An item's price may change when you select your shipping destination.<br />Please check the final total on the order summary page before completing payment.", THEME_NAME); ?>
-		<p><?php _e("Once your purchase has been completed, further items can not be added to this order.</p>", THEME_NAME); ?>
+			<p><?php _e("For shipments to Russia, due to the custom regulations we can only deliver packages to company addresses. If you have any questions please email us before you make an order info@leivankash.com ", THEME_NAME); ?>
+
+			<p><?php _e("For Saudi Arabia, United Arab Emirates, Serbia, Kazakhstan, India & Pakistan our FedEx delivery option is highly recommended, although the standard delivery option operates as well, clearance may take a longer time than suggested depending on each country's import regulations. ", THEME_NAME); ?>
 	</section>
 </form>
 

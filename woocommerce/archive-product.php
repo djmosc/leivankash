@@ -12,8 +12,26 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 get_header('shop'); ?>
-	<div class="container">
-
+	<div id="archive-product" class="container">
+		<?php 
+		if (is_tax( 'product_collection' )) :
+			global $wp_query;
+			$collection = $wp_query->get_queried_object();
+			$image = get_field('image', 'product_collection_'.$collection->term_id);
+		?>
+		<header class="archive-product-header clearfix" style="background-image: url(<?php echo $image['url']; ?>);">
+			<div class="content">
+				<div class="inner">
+					<h1 class="title italic"><?php echo $collection->name; ?></h1>
+					<div class="description">
+						<?php echo apply_filters('the_content', $collection->description); ?>
+					</div>
+					<p><a class="sackers scroll-to-btn small" id=""><?php _e("Shop the collection", THEME_NAME); ?> <i class="icon-arrow-down small" ></i></a><p>
+				</div>
+			</div>
+		</header>
+		<?php endif; ?>
+		<div class="inner clearfix">
 	<?php
 		/**
 		 * woocommerce_sidebar hook
@@ -32,28 +50,7 @@ get_header('shop'); ?>
 		do_action('woocommerce_before_main_content');
 	?>
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
-			<?php if (is_product_category()) {
-				global $wp_query;
-				$cat = $wp_query->get_queried_object();
-			} ?>
-			<header class="archive-product-header <?php if(is_product_category()) the_field('header_style', 'product_cat_'.$cat->term_id); ?> clearfix">
-			<?php 
-			if (is_product_category()):
-				$thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true ); 
-				$image = wp_get_attachment_image_src( $thumbnail_id, 'category' );
-				if($image):
-			?>
-				<div class="span alpha five">
-					    <img src="<?php echo $image[0]; ?>" alt="" class="scale" />
-				</div>
-				<h3 class="page-title text-center has-image"><?php woocommerce_page_title(); ?></h3>
-				<?php else: ?>
-				<h3 class="page-title text-center"><?php woocommerce_page_title(); ?></h3>
-				<?php endif; ?>
-			<?php else: ?>
-				<h3 class="page-title text-center"><?php woocommerce_page_title(); ?></h3>
-			<?php endif; ?>
-			</header>
+			<h5 class="page-title text-center"><?php woocommerce_page_title(); ?></h5>
 		<?php endif; ?>
 
 		<?php do_action( 'woocommerce_archive_description' ); ?>
@@ -106,6 +103,6 @@ get_header('shop'); ?>
 		 */
 		do_action('woocommerce_after_main_content');
 	?>
-
+		</div>
 	</div>
 <?php get_footer('shop'); ?>

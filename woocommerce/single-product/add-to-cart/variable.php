@@ -18,8 +18,9 @@ global $woocommerce, $product, $post;
 	<ul class="variations clearfix">
 		<?php $loop = 0; foreach ( $attributes as $name => $options ) : $loop++; ?>
 			<li class="variation">
+				<label for="<?php echo esc_attr( sanitize_title($name) ); ?>"><?php echo $woocommerce->attribute_label( $name ); ?></label>
 				<select id="<?php echo esc_attr( sanitize_title($name) ); ?>" name="attribute_<?php echo sanitize_title($name); ?>">
-					<option value=""><?php echo $woocommerce->attribute_label( $name ); ?></option>
+					<option value=""><?php _e("Select", THEME_NAME); ?> <?php echo $woocommerce->attribute_label( $name ); ?></option>
 				<?php
 					if ( is_array( $options ) ) {
 

@@ -33,4 +33,4 @@ if($id == get_option('woocommerce_shop_page_id')) {
 $classes = ($id) ? get_post_class($classes, $id) : $classes;
 ?>
 
-<div id="woocommerce" <?php if(is_shop() || is_product_category()): ?>class="span eight alpha omega break-on-tablet" <?php endif; ?>><div class="woocommerce <?php if(!empty($classes)) echo implode(' ', $classes); ?>">
+<div id="woocommerce" <?php if(is_shop() || is_product_category() || is_product_tag() || is_tax('product_collection')): ?>class="span seven-and-half omega" <?php endif; ?>><div class="woocommerce <?php if(!empty($classes)) echo implode(' ', $classes); ?>">

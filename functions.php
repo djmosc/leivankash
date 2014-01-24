@@ -17,25 +17,17 @@ require( $template_directory . '/inc/default/shortcodes.php' );
 
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 
-// remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
+remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
-// remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 
-// remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
 
-// remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 
-// remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
-// remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
-
-// remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
- 
-// remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
-
-// remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
-
-// remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
 
 // remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 
@@ -67,18 +59,31 @@ add_action('pre_get_posts','custom_pre_get_posts');
 
 add_action('admin_head', 'custom_admin_head');
 
+add_action( 'woocommerce_register_taxonomy', 'custom_woocommerce_register_taxonomy');
+
+add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_price', 10 );
+
+add_action( 'woocommerce_after_shop_loop_item', 'custom_woocommerce_after_shop_loop_item');
+
+add_action( 'woocommerce_single_product_summary', 'custom_woocommerce_single_product_summary', 2);
+
+add_action('single_product_additional_info', 'custom_single_product_accordion', 10);
+
+add_action( 'woocommerce_after_shop_loop', 'woocommerce_result_count', 20 );
+
 // Custom Filters
 
 add_filter( 'loop_shop_columns', 'custom_woocommerce_shop_columns');
 
 add_filter( 'walker_nav_menu_start_el' , 'custom_walker_nav_menu_start_el', 10, 4);
 
+add_filter( 'woocommerce_page_title' , 'custom_woocommerce_page_title');
+
+add_filter('single_add_to_cart_text', 'custom_add_to_cart_text');
+
 //Custom shortcodes
 
 //add_shortcode( 'phone_number', 'custom_phone_number');
-
-
-
 
 
 function custom_setup_theme() {
@@ -101,13 +106,11 @@ function custom_setup_theme() {
 		'customer_service' => __( 'Customer Service', THEME_NAME )
 	) );
 
-	//add_image_size( 'custom_medium', 706, 400, true);
+	add_image_size( 'scroll_item', 960, 640, true);
+	add_image_size( 'press_release_thumbnail', 220, 300, true);
+	add_image_size( 'press_release_widget', 310, 410, true);
 
-	add_rewrite_rule('skip/([^/]+)/upgrade', 'index.php?product=$matches[1]&upgrade=1', 'top');
-	
-	add_editor_style('/css/editor-styles.css');
-
-	
+	add_editor_style('editor-style.css');
 
 }
 
@@ -116,21 +119,49 @@ function custom_init(){
 
 	require( $template_directory . '/inc/classes/custom-post-type.php' );
 	if(function_exists('get_field')) {
-		// $testimonials_page = get_field('testimonials_page', 'options');
-		// $testimonial = new Custom_Post_Type( 'Testimonial', 
-	 // 		array(
-	 // 			'rewrite' => array( 'with_front' => false, 'slug' => get_page_uri($testimonials_page->ID) ),
-	 // 			'capability_type' => 'post',
-	 // 		 	'publicly_queryable' => true,
-	 //   			'has_archive' => true, 
-	 //    		'hierarchical' => false,
-	 //    		'exclude_from_search' => true,
-	 //    		'menu_position' => null,
-	 //    		'supports' => array('title', 'editor', 'page-attributes'),
-	 //    		'plural' => 'Testimonials'
-	 //   		)
-	 //   	);
+		$press_releases_page = get_field('press_releases_page', 'options');
+		$press_releases_url = get_page_uri($press_releases_page->ID);
+		$press_release = new Custom_Post_Type( 'Press release', 
+	 		array(
+	 			'rewrite' => array( 'with_front' => false, 'slug' => $press_releases_url ),
+	 			'capability_type' => 'post',
+	 		 	'publicly_queryable' => true,
+	   			'has_archive' => true, 
+	    		'hierarchical' => false,
+	    		'exclude_from_search' => false,
+	    		'menu_position' => null,
+	    		'supports' => array('title', 'editor', 'page-attributes', 'thumbnail'),
+	    		'plural' => 'Press Releases'
+	   		)
+	   	);
+
+	   	$press_release->add_taxonomy('press_category', 
+	   		array('hierarchical' => true, 'rewrite' => array( 'slug' => 'press-category')), 
+	   		array('plural' => __("Categories", THEME_NAME), 'singular_name' => __("Category", THEME_NAME))
+	   	);
+
+	   	$stockists_page = get_field('stockists_page', 'options');
+		$stockists_url = get_page_uri($stockists_page->ID);
+		$stockist = new Custom_Post_Type( 'Stockist', 
+	 		array(
+	 			'rewrite' => array( 'with_front' => false, 'slug' => $stockists_url ),
+	 			'capability_type' => 'post',
+	 		 	'publicly_queryable' => true,
+	   			'has_archive' => true, 
+	    		'hierarchical' => false,
+	    		'exclude_from_search' => false,
+	    		'menu_position' => null,
+	    		'supports' => array('title', 'editor', 'page-attributes'),
+	    		'plural' => 'Stockists'
+	   		)
+	   	);
+
+	   	$stockist->add_taxonomy('region', 
+	   		array('hierarchical' => true, 'show_admin_column' => true, 'query_var' => true, 'rewrite' => array( 'slug' => 'region')), 
+	   		array('plural' => __("Regions", THEME_NAME), 'singular_name' => __("Region", THEME_NAME))
+	   	);
 	}
+
 }
 
 function custom_wp(){
@@ -143,6 +174,8 @@ function custom_widgets_init() {
 	require( $template_directory . '/inc/widgets/featured-products-widget.php' );
 
 	require( $template_directory . '/inc/widgets/instagram-widget.php' );
+
+	require( $template_directory . '/inc/widgets/press-widget.php' );
 	
 	// 	/********************** Sidebars ***********************/
 
@@ -151,17 +184,36 @@ function custom_widgets_init() {
 		'id' => 'default',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
-		'before_title' => '<h6 class="widget-title">',
-		'after_title' => '</h6>',
+		'before_title' => '<h5 class="widget-title">',
+		'after_title' => '</h5>',
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'Footer', THEME_NAME ),
-		'id' => 'footer',
-		'before_widget' => '<aside id="%1$s" class="widget span one-third %2$s"><div class="inner">',
-		'after_widget' => '</div></aside>',
-		'before_title' => '<h6 class="widget-title">',
-		'after_title' => '</h6>',
+		'name' => __( 'Shop', THEME_NAME ),
+		'id' => 'shop',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h5 class="widget-title">',
+		'after_title' => '</h5>',
+	) );
+
+
+	register_sidebar( array(
+		'name' => __( 'Press', THEME_NAME ),
+		'id' => 'press',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h5 class="widget-title">',
+		'after_title' => '</h5>',
+	) );
+
+	register_sidebar( array(
+		'name' => __( 'Stockists', THEME_NAME ),
+		'id' => 'stockists',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h5 class="widget-title">',
+		'after_title' => '</h5>',
 	) );
 
 	// 	/********************** Content ***********************/
@@ -256,4 +308,63 @@ function custom_admin_head() {
 
 function custom_woocommerce_shop_columns($columns){
 	return 3;
+}
+
+
+function custom_woocommerce_register_taxonomy(){
+	register_taxonomy( 'product_collection',
+        array('product'),
+        array(
+            'hierarchical' 			=> true,
+            'update_count_callback' => '_woocommerce_term_recount',
+            'label' 				=> __( 'Product Collections', 'woocommerce'),
+            'labels' => array(
+			    'name' 				=> __( 'Product Collections', 'woocommerce'),
+			    'singular_name' 	=> __( 'Product Collection', 'woocommerce'),
+				'menu_name'			=> _x( 'Collections', 'Admin menu name', 'woocommerce' ),
+			    'search_items' 		=> __( 'Search Product Collections', 'woocommerce'),
+			    'all_items' 		=> __( 'All Product Collections', 'woocommerce'),
+			    'parent_item' 		=> __( 'Parent Product Collection', 'woocommerce'),
+			    'parent_item_colon' => __( 'Parent Product Collection:', 'woocommerce'),
+			    'edit_item' 		=> __( 'Edit Product Collection', 'woocommerce'),
+			    'update_item' 		=> __( 'Update Product Collection', 'woocommerce'),
+			    'add_new_item' 		=> __( 'Add New Product Collection', 'woocommerce'),
+			    'new_item_name' 	=> __( 'New Product Collection Name', 'woocommerce')
+			),
+            'show_ui' 				=> true,
+            'query_var' 			=> true,
+            'capabilities'			=> array(
+            	'manage_terms' 		=> 'manage_product_terms',
+				'edit_terms' 		=> 'edit_product_terms',
+				'delete_terms' 		=> 'delete_product_terms',
+				'assign_terms' 		=> 'assign_product_terms',
+            ),
+            'rewrite' 				=> array(
+            	'slug' => 'collection',
+            	'with_front' => false,
+            	'hierarchical' => true
+            )
+        )
+    );
+}
+
+function custom_woocommerce_after_shop_loop_item(){
+	woocommerce_get_template('single-product/collections.php');
+}
+
+function custom_woocommerce_single_product_summary(){
+	woocommerce_get_template('single-product/collections.php');
+}
+
+function custom_woocommerce_page_title($title){
+	if($title == "Shop") $title = __("Viewing All", THEME_NAME);
+	return $title;
+}
+
+function custom_single_product_accordion(){
+	woocommerce_get_template( 'single-product/accordion.php' );
+}
+
+function custom_add_to_cart_text( $text ) {
+	return __("Add to bag", THEME_NAME);
 }

@@ -24,7 +24,7 @@ h1 {
 
 h2 {
 	@include didot;
-	margin: 0.8em 0;
+	margin: 0.4em 0;
 	@include font-size(36);
 	line-height: 0.9;
 	text-transform: uppercase;
@@ -91,7 +91,7 @@ p {
 }
 
 .small {
-	font-size: 80%;
+	font-size: 90%;
 }
 
 .small {

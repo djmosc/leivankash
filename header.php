@@ -81,15 +81,13 @@ global $woocommerce;
 	<?php if(!is_front_page()): ?>
 		<?php
 		$args = array(
-				'delimiter'		=> ' / ',
-				'wrap_before'	=> '<nav id="breadcrumbs"><div class="inner container">',
-				'wrap_after'	=> '</div></nav>',
-				'before'		=> '<span>',
-				'after'			=> '</span>',
+				'delimiter'		=> ' &rsaquo; ',
+				'wrap_before'	=> '<nav id="breadcrumbs"><div class="inner container"><div class="crumbs">',
+				'wrap_after'	=> '</div></div></nav>',
 				'home'			=> _x( "Home", 'breadcrumb', 'woocommerce' )
 		);
 		?>
-		<?php //woocommerce_breadcrumb( $args ); ?>
+		<?php woocommerce_breadcrumb( $args ); ?>
 	<?php //if ( function_exists('yoast_breadcrumb') ) yoast_breadcrumb('<div id="breadcrumbs"><div class="inner container">','</div></div>'); ?>
 	<?php endif; ?>
 	<div id="main" class="site-main" role="main">

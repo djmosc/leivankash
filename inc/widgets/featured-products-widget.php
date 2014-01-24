@@ -43,7 +43,7 @@ if(class_exists('WC_Widget_Featured_Products')){
                     <?php if ( $title ) : ?>
                         <p class="widget-title uppercase text-center sackers"><?php echo $title; ?></p>
                     <?php endif; ?>
-                    <div class="products-scroller scroller" data-auto-scroll="true">
+                    <div class="products-scroller scroller" data-auto-scroll="false">
                         <div class="inner">
                             <div class="scroller-mask">
                             <?php while ($query->have_posts()) : $query->the_post(); global $product; ?>
@@ -51,7 +51,7 @@ if(class_exists('WC_Widget_Featured_Products')){
                                 <div class="scroll-item" data-id="<?php echo $query->post->ID; ?>">
                                     <a href="<?php echo esc_url( get_permalink( $query->post->ID ) ); ?>" title="<?php echo esc_attr($query->post->post_title ? $query->post->post_title : $query->post->ID); ?>">
                                         <h4 class="text-center no-margin"><?php the_title(); ?></h4>
-                                        <?php echo $product->get_image(); ?>
+                                        <?php echo $product->get_image('medium'); ?>
                                         <?php //if ( $query->post->post_title ) echo get_the_title( $query->post->ID ); else echo $query->post->ID; ?>
 
                                     </a>

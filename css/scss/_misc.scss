@@ -328,28 +328,14 @@ blockquote {
 }
 
 .pagination {
-	text-align: center;
-	margin: 10px 0;
-	font-size: 12px;
-	ol {
-		list-style: none;
-		display: inline-block;
-		clear: block;
-		margin: 0;
-		padding: 0;
+	@include sackers;
+	@include font-size(8);
+	.current {
+		color: #bb0000;
 	}
 
-	li {
-		float: left;
-		a {
-			color: #a40000;
-		}
-
-		a, span {
-			display: inline-block;
-			margin: 0 5px;
-		}
-
+	a {
+		padding: 0 0.2em;
 	}
 }
 
@@ -700,22 +686,25 @@ blockquote {
 		.btn {
 			display: block;
 			padding: 1.5em 3.2em;
-			border-bottom: 1px solid #dcdcdc;
+			border-bottom: 1px solid #FFF;
 			width: 100%;
 			text-align: left;
-			@include font-size(10);
+			@include font-size(8);
+			@include sackers;
 			text-transform: uppercase;
 			letter-spacing: 2px;
 			position: relative;
+			background: #eee;
+			color: #000;
 			&:hover {
-				color: #666;
-				background: #FFF;
+				color: #bb0000;
+				background: #ececec;
 			}
 
 			&:before {
 				@extend [class^="icon-"];
 				@extend .icon-arrow-down:before;
-				color: #dcdcdc;
+				color: #000;
 				position: absolute;
 				top: 50%;
 				right: 2em;
@@ -725,9 +714,8 @@ blockquote {
 		}
 
 		.content {
-			padding: 1.5em 2.5em;
+			padding: 0.5em 2.5em;
 			display: none;
-			border-bottom: 1px solid #dcdcdc;
 		}
 	}
 }
@@ -756,8 +744,16 @@ blockquote {
    ========================================================================== */
 
 .widget {
-	margin: 1em 0 3em 0;
-	> ul {
+	margin: 0 0 1em 0;
+
+	.widget-title {
+//		@include font-size(10);
+		border-bottom: 1px solid #e1e1e1;
+		padding: 0.5em 0;
+		margin: 0;
+	}
+	
+	ul {
 		padding: 0;
 		margin: 0.5em 0;
 		list-style: none;
@@ -765,15 +761,12 @@ blockquote {
 		li {
 			margin: 0.6em 0;
 			line-height: 1.2;
-			a {
-				text-transform: uppercase;
-				letter-spacing: 1px;
-				@include font-size(10);
-			}
-
+			
+			&.current-menu-item, 
+			&.current_page_item,
 			&.current-cat {
 				a {
-					color: #aa262f;
+					color: #bb0000;
 				}
 			}
 		}
@@ -790,55 +783,31 @@ blockquote {
 	// 	padding-top: $ratio * 100%;
 	// }
 
+	.title {
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		text-align: center;
+		margin-top: -6em;
+		color: #FFF;
+		z-index: 200;
+	
+		.csstransforms & {
+			margin-top: 0;
+			@include transform(translateY(-50%));
+		}
+	}
+
+
 	.post {
+		z-index: 100;
 		position: relative;
 		height: 100%;
 		width: 100%;
 		display: block;
 		overflow: hidden;
 
-		.content {
-			position: absolute;
-			top: 50%;
-			width: 100%;
-			text-align: center;
-			margin-top: -6em;
-			color: #FFF;
 		
-			.csstransforms & {
-
-
-				> .inner {
-					@include rotate(-30deg);
-				}
-
-				margin-top: 0;
-				@include transform(translateY(-50%) rotate(30deg));
-
-				&:before {
-					content: '';
-					position: absolute;
-					left: 50%;
-					top: -1010px;
-					width: 1px;
-					height: 1000px;
-					background: #fff200;
-					//
-				}
-
-				&:after {
-					content: '';
-					position: absolute;
-					left: 50%;
-					bottom: -990px;
-					width: 1px;
-					height: 1000px;
-					background: #fff200;
-					//@include rotate(30deg);
-				}
-			}
-		}
-
 		.featured-image {
 			img {
 				@include transition(all 1s ease);
@@ -846,14 +815,6 @@ blockquote {
 				filter: url(../svg/filters.svg#grayscale); 
 			    filter: gray;
 			    -webkit-filter: grayscale(1);
-			}
-		}
-		
-		&:hover {
-			
-			.featured-image img {
-				filter: none;
-				-webkit-filter: grayscale(0);
 			}
 		}
 	}
@@ -868,6 +829,7 @@ blockquote {
 	.widget-title {
 		margin: 3em 0;
 		@include font-size(0.8);
+		border-bottom: 0;
 	}
 
 	.products-scroller {
@@ -875,7 +837,7 @@ blockquote {
 		&:before {
 			content: '';
 			display: block;
-			padding-top: 88%;
+			padding-top: 107%;
 		}
 
 		> .inner {
@@ -918,6 +880,25 @@ blockquote {
 		padding: 2em 0;
 	}
 }
+
+.widget_product_categories,
+.widget_product_collections,
+.widget_nav_menu {
+	padding: 0 0 0.5em 0;
+	
+
+	ul {
+		margin: 0.4em 0 1em 0;
+		li {
+			a {
+				@include sackers;
+				@include font-size(8);
+			}
+		}
+	}
+}
+
+
 /* =============================================================================
    Lists
    ========================================================================== */
@@ -949,8 +930,8 @@ blockquote {
    ========================================================================== */
 
 table {
-	
-}
-	table td{
-		padding: 5px 0;
+
+ td {
+
 	}
+}

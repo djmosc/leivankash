@@ -28,13 +28,13 @@ $args = apply_filters('woocommerce_related_products_args', array(
 
 $products = new WP_Query( $args );
 
-$woocommerce_loop['columns'] 	= $columns;
+$woocommerce_loop['columns'] 	= 4;
 
 if ( $products->have_posts() ) : ?>
 
 	<div class="related products">
 
-		<h3 class="title text-center"><?php _e( 'You may also like&hellip;', 'woocommerce' ) ?></h3>
+		<h4 class="title text-center"><?php _e( 'You may also like&hellip;', 'woocommerce' ) ?></h4>
 
 		<?php woocommerce_product_loop_start(); ?>
 

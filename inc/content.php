@@ -1,5 +1,6 @@
-<?php $id = (isset($id)) ? $id : $post->ID; ?>
-<?php if($content = get_the_content()): ?>
+<?php $id = (isset($id)) ? $id : $post->ID;?>
+
+<?php if($content = get_the_content($id)): ?>
 <div class="page-content">
 	<div class="inner container">
 		<?php the_content(); ?>
@@ -43,7 +44,21 @@
 								break;
 						} ?>
 						<div class="break-on-tablet span <?php echo $class; ?>" style="<?php the_sub_field('css'); ?>">
-							<?php the_sub_field('content'); ?>
+							<?php 
+							$sub_layout = get_row_layout(); 
+							switch($sub_layout):
+								
+								case 'editor':
+									the_sub_field('content');
+									break;
+								case 'image':
+									$image = get_sub_field('image');
+								?>
+									<img src="<?php echo $image['url']; ?>" />
+								<?php
+									break;
+							
+							endswitch; ?>
 						</div>
 					<?php endwhile; ?>
 					</div>

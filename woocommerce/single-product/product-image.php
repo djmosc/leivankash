@@ -44,7 +44,7 @@ wp_enqueue_script('zoom');
 				$image_title = esc_attr( get_the_title( $attachment_id ) );
 				?>
 				<div class="scroll-item" data-id="<?php echo $attachment_id; ?>">
-				<?php echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" class="%s" title="%s" ><div class="enlarge"><i class="icon-search"></i>view larger image</div>%s</a>', $image_link, $image_class, '', $image ), $attachment_id, $post->ID, $image_class ); ?>
+				<?php echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" class="%s" title="%s" ><div class="enlarge"><i class="icon-search"></i>Rollover to Zoom</div>%s</a>', $image_link, $image_class, '', $image ), $attachment_id, $post->ID, $image_class ); ?>
 				</div>
 				<?php $loop++;
 			}
@@ -85,7 +85,7 @@ wp_enqueue_script('zoom');
 					
 					?>
 					<div class="scroll-item <?php if($curr_variation == $variation['attributes'][0]) echo 'current'; ?>" data-id="<?php echo $variation['variation_id']; ?>">
-					<?php echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" class="%s" title="%s" ><div class="enlarge"><i class="icon-search"></i>View larger image</div>%s</a>', $image_link, $image_class, '', $image ), $attachment_id, $post->ID, $image_class ); ?>
+					<?php echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" class="%s" title="%s" ><div class="enlarge"><i class="icon-search"></i>Rollover to Zoom</div>%s</a>', $image_link, $image_class, '', $image ), $attachment_id, $post->ID, $image_class ); ?>
 					</div>
 					<?php $loop++;
 				}
@@ -104,7 +104,7 @@ wp_enqueue_script('zoom');
 			}
 			?>
 			<div class="scroll-item current" data-id="<?php echo get_post_thumbnail_id(); ?>">
-				<?php echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" itemprop="image" class="woocommerce-main-image zoom" title="%s"  rel="prettyPhoto' . $gallery . '"><div class="enlarge"><i class="icon-search"></i>View larger image</div>%s</a>', $image_link, '', $image ), $post->ID ); ?>
+				<?php echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" itemprop="image" class="woocommerce-main-image zoom" title="%s"  rel="prettyPhoto' . $gallery . '"><div class="enlarge"><i class="icon-search"></i>Rollover to Zoom</div>%s</a>', $image_link, '', $image ), $post->ID ); ?>
 			</div>
 		<?php endif; ?>
 		</div>

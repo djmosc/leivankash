@@ -11,6 +11,12 @@
  * @since leivankash 1.0
  */
 ?>
-<div id="sidebar" class="span two hide-on-tablet alpha">
-	<?php dynamic_sidebar('default'); ?>
+
+<div id="sidebar" class="span one-fourth alpha">
+	<button class="mobile-sidebar-btn"></button>
+	<?php 
+	if ( ! acf_Widget::dynamic_widgets( 'default' ) ) :
+		dynamic_sidebar('default');
+	endif;
+	?>
 </div>

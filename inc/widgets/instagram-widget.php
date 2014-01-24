@@ -36,7 +36,7 @@ class Instagram extends WP_Widget {
 					<img src="<?php echo $data->images->low_resolution->url; ?>" />
 				</div>
 				<footer class="footer">
-			 		<p class="sackers small text-center" ><?php _e("Find us on Instagram", THEME_NAME); ?></p>
+			 		<p class="sackers small text-center no-margin" ><?php _e("Find us on Instagram", THEME_NAME); ?></p>
 			 		<h3 class="no-margin username text-center">@<?php echo $args['username']; ?></h3>
 			 	</footer>
 		 	</a>
